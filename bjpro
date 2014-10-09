@@ -1,0 +1,44 @@
+mkdir classes
+mkdir classes/Onserver
+touch compile
+touch classes/manifest.mf
+mkdir src
+mkdir src/lib
+chmod a+x compile
+
+echo "#!/bin/sh
+ONSERVER=Onserver
+PROJ_PATH=/Users/hynial/test/java/
+CLA_PATH=\$PROJ_PATH/classes
+SRC_PATH=\$PROJ_PATH/src
+JAR_PATH=\$PROJ_PATH/src/lib
+
+runFile=\$CLA_PATH/\$ONSERVER/run
+
+rm -f \$SRC_PATH/sources.list
+find \$SRC_PATH -name *.java > \$SRC_PATH/sources.list
+
+#rm -rf \$CLA_PATH/\$ONSERVER
+rm -rf \`ls \$CLA_PATH/\$ONSERVER | awk '{if(\$0 != \"run\") print \"classes/Onserver/\"\$0}'\`
+#mkdir \$CLA_PATH/\$ONSERVER
+if [ ! -f \"\$runFile\" ]; then 
+	touch \"\$runFile\"
+	chmod a+x \"\$runFile\"
+	echo \"#运行之前需要先切换到run文件所在目录\\n#eg:java -classpath .:lib/*1.jar lib/*2.jar *(.class) \\njava -classpath .:lib/*1.jar lib/*2.jar \" > \$CLA_PATH/\$ONSERVER/run
+fi
+#mkdir \$CLA_PATH/\$ONSERVER
+#touch \$CLA_PATH/\$ONSERVER/run
+chmod a+x \$CLA_PATH/\$ONSERVER/run
+
+javac -d \$CLA_PATH/\$ONSERVER -classpath \$JAR_PATH/*.jar @\$SRC_PATH/sources.list
+
+cp -rf \$JAR_PATH  \$CLA_PATH/\$ONSERVER
+
+##运行此文件前填空两处，PROJ_PATH项目路径和javac的classpath,须在项目根目录下
+" > compile
+
+echo "Manifest-Version: 1.0
+Created-By: hynial 
+Main-Class: 
+Class-Path: 
+" > classes/manifest.mf 
