@@ -11,10 +11,7 @@
 2、切换到Onserver目录，运行：jar cvmf ../manifest.mf 自定义jar文件名.jar .
 3、不出错当前目录下生成文件：自定义jar文件名.jar
 4、试试运行jar包：java -jar 自定义jar文件名.jar
-祝你好运🍀
-～by Hynial
 
 因为升级了XCode 出现requires admin privileges问题，解决方法是：
 sudo xcodebuild -license
 while(1) 'space';agree 
-~BYE
